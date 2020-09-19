@@ -7,7 +7,7 @@
 // src/App.js
 
 import React, { Component } from 'react'
-// 1)
+// 1) - Importing a child component named Dice to be called within the render. 
 import Dice from './Dice'
 import Log from './Log'
 
@@ -22,7 +22,7 @@ import dice6 from '../assets/dice-6.png'
 class Board extends Component{
   constructor(props){
     super(props)
-    // 2)
+    // 2) Initializing the class Board's state objects and giving them default values.
     this.state = {
       rollImages: [dice1, dice2, dice3, dice4, dice5, dice6],
       currentPic: dice,
@@ -31,12 +31,12 @@ class Board extends Component{
   }
 
   handleRoll = () => {
-    // 3)
+    // 3) Destructuring the state objects rollImages and diceLog so they can be used as variables.
     let { rollImages, diceLog } = this.state
     let randomNum = Math.ceil(Math.random() * rollImages.length)
-    // 4)
+    // 4) Creating a new variable and assigning it a random image from the rollImages array
     let newRoll = rollImages[randomNum]
-    // 5)
+    // 5) Updating the state of currentPic to be the random image we stored in our new variable and updating the state of diceLog, which is the roll history, to include the newRoll.
     this.setState({ currentPic: newRoll, diceLog: [... diceLog, newRoll] })
   }
 
@@ -44,7 +44,7 @@ class Board extends Component{
     const { currentPic, diceLog } = this.state
     return(
       <div id="board-container">
-        // 6)
+        {/* 6) calls the compenent Dice and renders it in the DOM. Gives it the props roll and currentPic, letting it affect those state objects */}
         <Dice
           roll={ this.handleRoll }
           currentPic={ currentPic }
@@ -66,18 +66,18 @@ export default Board
 import React, { Component } from 'react'
 
 class Dice extends Component{
-  // 7)
+  // 7) The render method. Its the only required method in a class component. Basically tells React what to display on the page. 
   render(){
-    // 8)
+    // 8) Destructuring currentPic and roll from the props so they can be used as variables.
     const { currentPic, roll } = this.props
     return(
       <div id="dice-container">
         <h2>Click to Roll</h2>
         <img
           id="dice-img"
-          // 9)
+          // 9) Specifies a bit of text that will be displayed or read if the image cannot be displayed.
           alt="images of dice"
-          // 10)
+          // 10) src attribute for the img tag. Can be a url or in this case a variable for the image imported into the component. 
           src={ currentPic }
           onClick={ roll }
         />
