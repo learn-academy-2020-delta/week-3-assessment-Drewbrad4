@@ -4,11 +4,12 @@
 console.log("1:");
 
 const fibnachoSequence = (n) => {
-    // initializing an array to hold the beginning values of the sequence
-    let fibonacciArray = [1, 1]
-    // For loop that pushes back to the array and adds the numbers according to the algorithm: X(n) = X(n-1) + X(n-2)
-    for(let i = 2; i < n; i++){
-        fibonacciArray.push(fibonacciArray[i - 2] + fibonacciArray[i - 1])
+    // initializing an array to hold the beginning values of the sequence and an anchor for our loop
+    let fibonacciArray = [1, 1], i = 2
+    // While loop that pushes back to the array and adds the numbers according to the algorithm: X(n) = X(n-1) + X(n-2)
+    while(i < n){
+        fibonacciArray.push(fibonacciArray[i - 2] + fibonacciArray[i - 1]);
+        i++;
     }
     //return new array
     return fibonacciArray
@@ -26,7 +27,7 @@ var fullArr2 = ["hello", 7, 23, -823, false, 78, null, "67", 6, "number"]
 
 const numSortLowHigh = (array) => {
     // filters for number types and odd numbers and then sorts the filtered values using sort with the added method for numbers.
-    return array.filter(x => typeof x === "number" && x % 2 !== 0).sort((a, b) => a - b)
+    return array.filter(value => typeof value === "number" && value % 2 !== 0).sort((a, b) => a - b)
 }
 
 console.log(numSortLowHigh(fullArr1))
@@ -48,7 +49,7 @@ const middleLetter = (string) => {
     } else if (string.length % 2 !== 0){
         // returns the single middle character
         return string.charAt(string.length / 2)
-    }
+    } 
 }
 
 console.log(middleLetter(middleLetters1))
@@ -57,6 +58,7 @@ console.log(middleLetter(middleLetters2), "\n")
 // --------------------4) Create a CLASS to get the area of a sphere. Create three spheres with different radi as test cases. Area of a sphere =  4πr^2 (four pi r squared)
 console.log("4:");
 
+// creating class called Sphere with a single value called radius
 class Sphere {
     constructor(radius) {
         this.radius = radius;
@@ -66,11 +68,12 @@ class Sphere {
         return (4 * Math.PI * this.radius ** 2).toFixed(2)
     }
     // getter for method
-    get area() {
+     get area() {
         return this.calcArea()
     }
 }
 
+//Creating new objects of the class Sphere
 var sphere1 = new Sphere(5)
 var sphere2 = new Sphere(10)
 var sphere3 = new Sphere(6)
@@ -90,21 +93,10 @@ var numbersToAdd3 = []
 // Expected output: []
 
 const addUpArrays = (arr) => {
-    // If checking that the arr has values in it
-   if(arr.length > 0){
-        return arr.map((num, index) => {
-            // adding up numbers in the array
-            if(index !== 0){
-                return num = num + arr[index - 1]
-            // else so that the first number in the array is returned as well
-            } else {
-                return num
-            }
-        })
-    // else returning the empty arr
-    } else {
-        return arr
-   }
+    // Anchor variable for the incrementation
+    let previousNum = 0
+    // mapping through and adding the previous number
+    return arr.map(num => previousNum += num)
 }
 
 
